@@ -25,7 +25,7 @@ if (-not $stageFull.StartsWith($rootFull, [StringComparison]::OrdinalIgnoreCase)
 if (Test-Path $stage) { Remove-Item -LiteralPath $stage -Recurse -Force }
 New-Item -ItemType Directory -Path $stage -Force | Out-Null
 Copy-Item -Path (Join-Path $ext "*") -Destination $stage -Recurse -Force
-Copy-Item -LiteralPath (Join-Path $root "安装说明.txt") -Destination (Join-Path $stage "安装说明.txt") -Force
+Copy-Item -LiteralPath (Join-Path $root "INSTALL.txt") -Destination (Join-Path $stage "INSTALL.txt") -Force
 if (Test-Path $zip) { Remove-Item -LiteralPath $zip -Force }
 if (Test-Path $hashFile) { Remove-Item -LiteralPath $hashFile -Force }
 
