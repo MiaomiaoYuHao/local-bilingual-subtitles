@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:03.400
+Hello everyone, and welcome back to the channel.
+
+00:00:03.400 --> 00:00:06.800
+Today we are building a small browser extension.
+
+00:00:06.800 --> 00:00:10.200
+It reads the subtitles from the current page.
+
+00:00:10.200 --> 00:00:13.600
+Then it translates every line into Chinese.
+
+00:00:13.600 --> 00:00:17.000
+Everything runs locally, inside your browser.
+
+00:00:17.000 --> 00:00:20.400
+No cloud API, and no token costs at all.
+
+00:00:20.400 --> 00:00:23.800
+The model is cached, so it also works offline.
+
+00:00:23.800 --> 00:00:27.200
+Press the space bar to open the bilingual popup.
+
+00:00:27.200 --> 00:00:30.600
+The popup always keeps the last five lines.
+
+00:00:30.600 --> 00:00:34.000
+Thanks for watching, and see you next time.

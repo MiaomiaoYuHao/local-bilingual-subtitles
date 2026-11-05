@@ -1,0 +1,10 @@
+{
+  "font_size": 0.4,
+  "font_color": "#FFFFFF",
+  "background_alpha": 0.5,
+  "body": [
+    { "from": 1.02, "to": 3.5, "location": 2, "content": "大家好啊" },
+    { "from": 3.5, "to": 6.2, "location": 2, "content": "欢迎来到本期视频" },
+    { "from": 6.2, "to": 9.0, "location": 2, "content": "今天我们来做一个浏览器扩展" }
+  ]
+}

@@ -1,0 +1,18 @@
+本地双语字幕 1.5.38 - 安装说明
+
+1. 把本压缩包解压到一个固定且长期保留的文件夹。
+2. 打开 Edge 的 edge://extensions/，或 Chrome 的 chrome://extensions/。
+3. 开启右上角的“开发人员模式”。
+4. 点击“加载解压缩的扩展”。
+5. 选择解压后包含 manifest.json 的文件夹。
+6. 回到视频页面按 F5 刷新，再按 Z 开启双语字幕。
+
+说明：
+- 不需要安装 Node.js，也不需要执行 npm 命令。
+- 模型、OCR、ASR 运行时已经包含在扩展中，无需首次下载。
+- 默认使用本地 Opus-MT 翻译；不要选择“在线翻译”时，字幕不会发送到云端。
+- 字幕显示为最近三条英文及中文译文。
+- 如果扩展目录被移动或删除，需要重新加载扩展。
+
+项目主页：
+https://github.com/MiaomiaoYuHao/local-bilingual-subtitles

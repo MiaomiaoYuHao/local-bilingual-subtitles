@@ -1,0 +1,14 @@
+{
+  "wireMagic": "pb3",
+  "events": [
+    { "tStartMs": 0, "dDurationMs": 100, "id": 1, "wpWinPosId": 0, "wsWinStyleId": 0 },
+    { "tStartMs": 1200, "dDurationMs": 2200, "segs": [ { "utf8": "Hello everyone", "acAsrConf": 0 }, { "utf8": " and welcome back" }, { "utf8": "\n" }, { "utf8": "to the channel." } ] },
+    { "tStartMs": 3600, "dDurationMs": 1800, "segs": [ { "utf8": "Today we build a" }, { "utf8": " browser extension." } ] },
+    { "tStartMs": 5400, "segs": [ { "utf8": "[Music]" } ] },
+    { "tStartMs": 7200, "dDurationMs": 1500, "segs": [ { "utf8": "Let's get started.", "acAsrConf": 0 } ] },
+    { "tStartMs": 9000, "dDurationMs": 1000, "aAppend": 1, "segs": [ { "utf8": "" } ] },
+    { "tStartMs": 10500, "dDurationMs": 2400, "segs": [ { "utf8": "First, we need to" }, { "utf8": " read the subtitles from the page." } ] },
+    { "tStartMs": 13200, "dDurationMs": 2600, "segs": [ { "utf8": "Then we translate them locally with WebGPU." } ] },
+    { "tStartMs": 16200, "dDurationMs": 3000, "segs": [ { "utf8": "No cloud, no API keys, no tokens." } ] }
+  ]
+}

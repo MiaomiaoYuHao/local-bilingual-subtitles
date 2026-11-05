@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Low contrast subtitle fixture</title>
+<style>body{background:#111;color:#ddd;font:14px system-ui;margin:20px}video{width:640px;background:#000;border-radius:8px}</style></head>
+<body>
+<h1>Low contrast burned-in subtitle fixture</h1>
+<video id="v" muted autoplay playsinline></video>
+<canvas id="c" width="960" height="540" style="display:none"></canvas>
+<script>
+const c=document.getElementById("c"), g=c.getContext("2d"), v=document.getElementById("v");
+function draw(){
+  g.fillStyle="#5a5a5a"; g.fillRect(0,0,c.width,c.height);
+  g.fillStyle="#7a7a7a"; g.font="bold 46px Arial"; g.textAlign="center";
+  g.fillText("Low contrast subtitle test", c.width/2, 470);
+}
+draw(); setInterval(draw,100);
+const stream=c.captureStream(10); v.srcObject=stream; v.play().catch(()=>{});
+</script>
+</body></html>

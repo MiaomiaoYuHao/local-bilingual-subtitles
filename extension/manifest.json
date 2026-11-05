@@ -1,0 +1,99 @@
+{
+  "manifest_version": 3,
+  "name": "本地双语字幕 V1",
+  "short_name": "双语字幕",
+  "version": "1.5.38",
+  "description": "纯本地英文视频字幕转中文双语弹窗：内置 Opus-MT 离线翻译 + 可选在线翻译，WebGPU/WASM，零云端 API、零 token 消耗。",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "offscreen",
+    "scripting",
+    "downloads",
+    "downloads.open",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtube-nocookie.com/*"
+      ],
+      "js": [
+        "src/content/yt-main-hook.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false,
+      "js": [
+        "src/shared/protocol.js",
+        "src/shared/dom-utils.js",
+        "src/shared/subtitle-cache.js",
+        "src/shared/sentence-merge.js",
+        "src/shared/ocr-text.js",
+        "src/shared/cross-check.js",
+        "src/adapters/adapter-api.js",
+        "src/adapters/youtube.js",
+        "src/adapters/bilibili.js",
+        "src/adapters/douyin.js",
+        "src/adapters/generic-track.js",
+        "src/core/sources.js",
+        "src/core/plan.js",
+        "src/core/router.js",
+        "src/shared/docx.js",
+        "src/content/audio-capture.js",
+        "src/content/note-store.js",
+        "src/content/overlay-css.js",
+        "src/content/overlay.js",
+        "src/content/main.js"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self'"
+  },
+  "action": {
+    "default_title": "本地双语字幕 V1",
+    "default_popup": "src/ui/action-popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*.png",
+        "vendor/ocr/*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ]
+}

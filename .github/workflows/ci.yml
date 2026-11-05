@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Verify build report
+        run: |
+          if (-not (Test-Path build-report.json)) { throw 'build-report.json was not generated' }
+          $report = Get-Content build-report.json -Raw | ConvertFrom-Json
+          if ($report.manifest.version -ne '1.5.38') { throw 'Unexpected manifest version' }

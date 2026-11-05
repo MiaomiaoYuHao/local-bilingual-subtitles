@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      :root { color-scheme: light; }
+      * { box-sizing: border-box; }
+      body {
+        width: 320px;
+        margin: 0;
+        padding: 12px;
+        background: #f3f4f6;
+        color: #1f2328;
+        font: 13px/1.5 system-ui, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1 { font-size: 15px; font-weight: 600; margin: 2px 0 10px; display: flex; align-items: center; gap: 7px; color: #111827; }
+      h1 .dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; flex: 0 0 auto; }
+      h1 .dot.wait { background: #f59e0b; }
+      h1 .dot.err { background: #ef4444; }
+      h1 .sub { font-size: 12px; font-weight: 400; color: #6b7280; margin-left: auto; }
+
+      .card { background: #fff; border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+      .card > .title { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
+
+      .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 5px 0; }
+      .row .k { color: #374151; }
+
+      .seg { display: flex; background: #f2f4f7; border-radius: 10px; padding: 3px; gap: 3px; }
+      .seg button { flex: 1; border: 0; background: transparent; color: #4b5563; font: inherit; font-size: 12.5px; padding: 7px 0; border-radius: 8px; cursor: pointer; }
+      .seg button.on { background: #2563eb; color: #fff; font-weight: 600; }
+
+      select, input.text {
+        font: inherit; font-size: 12.5px; color: #111827; background: #f2f4f7;
+        border: 0; border-radius: 8px; padding: 6px 8px; max-width: 176px;
+      }
+      input.text.wide { width: 100%; max-width: none; }
+      button.fill { font: inherit; font-size: 12.5px; border: 0; border-radius: 8px; padding: 7px 11px; background: #f2f4f7; color: #111827; cursor: pointer; white-space: nowrap; }
+      button.fill:hover { background: #e8ebf0; }
+      button.fill.primary { background: #2563eb; color: #fff; font-weight: 600; }
+      button.fill.primary:hover { background: #1d4ed8; }
+      .btnrow { display: flex; gap: 8px; align-items: center; }
+
+      .switch { position: relative; width: 40px; height: 22px; flex: 0 0 auto; }
+      .switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+      .switch .track { position: absolute; inset: 0; background: #d8dce3; border-radius: 999px; transition: background .15s; }
+      .switch .knob { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: transform .15s; }
+      .switch input:checked + .track { background: #2563eb; }
+      .switch input:checked + .track + .knob { transform: translateX(18px); }
+
+      .hint { font-size: 11.5px; color: #6b7280; margin-top: 6px; line-height: 1.55; }
+      .hint b { color: #374151; font-weight: 600; }
+      .toast { font-size: 11.5px; color: #2563eb; margin-top: 6px; }
+      .notelist { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; max-height: 168px; overflow: auto; }
+      .notelist.hidden { display: none; }
+      .notelist button {
+        text-align: left; font: inherit; font-size: 12px; border: 0; border-radius: 8px;
+        background: #f2f4f7; color: #111827; padding: 7px 9px; cursor: pointer;
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      }
+      .notelist button:hover { background: #e8ebf0; }
+      .notelist button.on { background: #dbeafe; color: #1d4ed8; font-weight: 600; }
+      .notelist .empty { font-size: 11.5px; color: #9ca3af; padding: 4px 2px; }
+      .toast.err { color: #dc2626; }
+      kbd { background: #f2f4f7; border-radius: 5px; padding: 1px 5px; font: 600 11.5px/1.6 ui-monospace, Consolas, monospace; color: #111827; }
+    </style>
+  </head>
+  <body>
+    <h1><span class="dot" id="dot"></span>本地双语字幕<span class="sub" id="state-text">正在准备…</span></h1>
+
+
+    <div class="card">
+      <div class="title">翻译方式</div>
+      <div class="seg">
+        <button id="mode-online">在线翻译</button>
+        <button id="mode-offline">离线翻译</button>
+      </div>
+      <div class="hint">质量更好，不可用时自动切离线。</div>
+    </div>
+
+    <div class="card">
+      <div class="title">保存笔记</div>
+      <div class="row">
+        <span class="k">保存位置</span>
+        <div class="btnrow"><button class="fill" id="pick-folder">选择文件夹</button><button class="fill" id="open-folder">打开文件夹</button><button class="fill" id="confirm-folder" style="display:none;background:#fef3c7;color:#92400e">确认（V）</button></div>
+      </div>
+      <input class="text wide" id="folder-path" placeholder="笔记文件夹，例如 C:\笔记" style="margin:6px 0 2px" />
+      <div class="row">
+        <span class="k">笔记文件名</span>
+        <div class="btnrow">
+          <button class="fill" id="pick-note">选择笔记</button>
+          <button class="fill primary" id="new-note">新建</button>
+          <button class="fill" id="view-note">查看</button>
+        </div>
+      </div>
+      <input class="text wide" id="notename" list="notefiles" placeholder="双语字幕笔记.docx" />
+      <datalist id="notefiles"></datalist>
+      <div id="notelist" class="notelist hidden"></div>
+      <div class="row">
+        <span class="k">快捷键</span>
+        <select id="savekey">
+          <option value="s">S 键（默认）</option>
+          <option value="b">B 键</option>
+          <option value="n">N 键</option>
+          <option value="m">M 键</option>
+          <option value="v">V 键</option>
+          <option value="none">不用快捷键</option>
+        </select>
+      </div>
+      <div class="hint">选好文件夹和笔记文件后，按 <kbd>S</kbd> 把当前 3 条双语字幕追加上去（不覆盖）。</div>
+    </div>
+
+    <div class="card">
+      <div class="title">字幕显示</div>
+      <div class="row">
+        <span class="k">快捷键</span>
+        <select id="hotkey">
+          <option value="z">Z 键（默认）</option>
+          <option value="x">X 键</option>
+          <option value="e">E 键</option>
+          <option value="q">Q 键</option>
+          <option value="v">V 键</option>
+          <option value="none">不用快捷键</option>
+        </select>
+      </div>
+      <div class="row">
+        <span class="k">页面悬浮按钮</span>
+        <label class="switch"><input type="checkbox" id="fabvis" /><span class="track"></span><span class="knob"></span></label>
+      </div>
+      <div class="hint">按 <kbd>Z</kbd> 显示或隐藏双语字幕。</div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script type="module" src="action-popup.js"></script>
+  </body>
+</html>

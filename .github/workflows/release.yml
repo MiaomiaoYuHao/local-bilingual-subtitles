@@ -1,0 +1,42 @@
+name: Release package
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Package extension
+        shell: powershell
+        run: ./tools/package-release.ps1
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/local-bilingual-subtitles-v*.zip
+            release/local-bilingual-subtitles-v*.zip.sha256.txt
+          body: |
+            ## 下载即用
+
+            1. 下载下方的 `local-bilingual-subtitles-v*.zip`
+            2. 解压到一个固定且长期保留的文件夹
+            3. 打开 `edge://extensions/` 或 `chrome://extensions/`
+            4. 开启“开发人员模式”
+            5. 点击“加载解压缩的扩展”，选择包含 `manifest.json` 的文件夹
+            6. 回到视频页面刷新并按 `Z`
+
+            发布包已内含翻译、OCR、ASR 模型与运行时，无需安装 Node.js，也无需构建。

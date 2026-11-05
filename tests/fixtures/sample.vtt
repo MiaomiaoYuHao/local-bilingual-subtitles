@@ -1,0 +1,27 @@
+WEBVTT
+Kind: captions
+Language: en
+
+NOTE
+This is a comment block that must be ignored.
+
+STYLE
+::cue { color: white }
+
+intro
+00:00:01.000 --> 00:00:03.500 line:90% align:middle
+<i>Welcome to</i> the demo.
+
+00:00:03.500 --> 00:00:06.000
+<v Speaker>Second line &amp; more.</v>
+
+REGION
+id:fred
+width:40%
+
+00:00:06.000 --> 00:00:08.250
+<c.yellow>Multi-line cue</c>
+continues here.
+
+00:01:10.500 --> 00:01:12.000
+Last cue with a long timestamp.

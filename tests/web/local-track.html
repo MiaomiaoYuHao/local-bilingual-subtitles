@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Local &lt;track&gt; subtitle fixture</title>
+    <style>
+      body { background: #0f172a; color: #e2e8f0; font: 14px/1.6 system-ui, sans-serif; margin: 0; padding: 24px; }
+      h1 { font-size: 18px; }
+      code { color: #7dd3fc; }
+      video { width: 640px; max-width: 100%; background: #000; border-radius: 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>Local soft-subtitle fixture (generic &lt;track&gt; adapter)</h1>
+    <p>
+      Purpose-built page for the automated playtest. The video carries a real WebVTT
+      <code>&lt;track kind="subtitles" srclang="en" default&gt;</code>; the native captions are visible,
+      so this page also proves the overlay does not replace the player's own subtitles.
+    </p>
+    <video id="v" width="640" controls preload="auto" muted>
+      <source src="sample.webm" type="video/webm" />
+      <track id="t" kind="subtitles" srclang="en" label="English" src="sample.vtt" default />
+    </video>
+    <p id="status">booting…</p>
+    <script>
+      const v = document.getElementById("v");
+      const status = document.getElementById("status");
+      window.__fixture = { ready: false, nativeTracks: 0, nativeMode: null };
+      v.addEventListener("loadedmetadata", () => {
+        window.__fixture.ready = true;
+        status.textContent = `metadata ready · duration=${v.duration.toFixed(2)}s`;
+      });
+      v.addEventListener("loadeddata", () => {
+        window.__fixture.nativeTracks = v.textTracks.length;
+        window.__fixture.nativeMode = v.textTracks[0] ? v.textTracks[0].mode : null;
+        status.textContent = `tracks=${v.textTracks.length} mode=${window.__fixture.nativeMode}`;
+      });
+    </script>
+  </body>
+</html>

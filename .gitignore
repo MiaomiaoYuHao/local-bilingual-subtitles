@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+
+# Generated / local build artifacts
+dist/
+release/
+build-report.json
+*.zip
+
+# Test and browser artifacts
+.playtest/
+playtest/
+*.log
+.pick-dir-shot.png
+
+# Private / local-only content
+docs/HANDOFF.md
+backups/
+笔记/
+.env
+.env.*
+!.env.example
+
+# One-off development and debugging scripts kept outside the public tree
+tools/acceptance-cloud.mjs
+tools/acceptance-live-refresh.mjs
+tools/acceptance-note*.mjs
+tools/acceptance-popup-note.mjs
+tools/acceptance-vkey-page.mjs
+tools/add-*.mjs
+tools/analyze-note-dups.mjs
+tools/bump*.mjs
+tools/capture.ps1
+tools/check-*.mjs
+tools/close-*.mjs
+tools/close-*.ps1
+tools/collect-videos.mjs
+tools/dl-asr.mjs
+tools/dump-*.mjs
+tools/enum-windows.ps1
+tools/eval-translation.mjs
+tools/final-*.mjs
+tools/finalize-cleanup.mjs
+tools/fix-*.mjs
+tools/host-smoke.mjs
+tools/instrument.mjs
+tools/launch-browser.mjs
+tools/list-*.ps1
+tools/list-*.mjs
+tools/make-*.mjs
+tools/minify-extension.mjs
+tools/model-bench.mjs
+tools/ocr-scan.mjs
+tools/patch-*.mjs
+tools/playtest-*.mjs
+tools/png.mjs
+tools/probe-*.mjs
+tools/reload-*.mjs
+tools/rewrite-demo.mjs
+tools/shot-pick-dir.mjs
+tools/smoke-current.mjs
+tools/test-*.mjs
+tools/verify-*.mjs
+tools/wake-ext.mjs
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
