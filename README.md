@@ -8,6 +8,7 @@
 
 [![CI](https://github.com/MiaomiaoYuHao/local-bilingual-subtitles/actions/workflows/ci.yml/badge.svg)](https://github.com/MiaomiaoYuHao/local-bilingual-subtitles/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Support](https://img.shields.io/badge/Support-WeChat%20Pay-07C160.svg)](#作者答谢)
 
 ## 功能
 
@@ -43,7 +44,9 @@
 6. 点击 **加载解压缩的扩展**，选择刚解压的文件夹
 7. 回到视频页面刷新一次，按 `Z` 开启双语字幕
 
-> 发布包已经内含翻译、OCR、ASR 模型和运行时。首次可用不需要联网下载模型；解压后的 `INSTALL.txt` 也有安装说明。`r`n`r`n## 开发者从源码加载
+> 发布包已经内含翻译、OCR、ASR 模型和运行时。首次可用不需要联网下载模型；解压后的 `INSTALL.txt` 也有安装说明。
+
+## 开发者从源码加载
 
 
 
@@ -137,6 +140,16 @@ docs/                 验收记录和历史验证资料
 ## 参与贡献
 
 欢迎提交 Issue 和 Pull Request。提交前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。安全问题请按 [SECURITY.md](SECURITY.md) 私下报告。
+
+## 作者答谢
+
+如果这个项目对你有帮助，欢迎扫码请作者喝杯咖啡。赞赏完全自愿，不影响软件功能、更新或支持。
+
+<p align="center">
+  <a href="SUPPORT.md"><img src="docs/support/wechat-pay.jpg" alt="微信赞赏码" width="300"></a>
+</p>
+
+更多说明见 [SUPPORT.md](SUPPORT.md)。
 
 ## License
 
